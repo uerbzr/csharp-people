@@ -8,11 +8,20 @@ This should run out of the box
 
 ## Layers
 
-Typical layers in the app consist off:
+Application is split into the following layers:
 
-- Data layer consisting of a db which is currently set to an EntityFrameworkCore.InMemory instance
+| Layer      | Description                                                                 |
+|------------|-----------------------------------------------------------------------------|
+| Data       | Database layer using EntityFrameworkCore.InMemory                          |
+| Repository | Generic repository abstraction                                              |
+| Models     | Contains domain models                                                      |
+| API        | Contains DTOs and endpoint definitions                                      |
 
-- Repository which is generic
-- Models containing any Domain models
-- API which contains the DTOs and Endpoints
+## Branches
 
+The following branches exist on this repository:
+
+| Branch                    | Description                          |
+|--------------------------|--------------------------------------|
+| main                     | Pure vanilla code                    |
+| feature/inputoutputpattern | Design pattern for input/output     |
