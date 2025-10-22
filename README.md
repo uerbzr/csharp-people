@@ -16,6 +16,8 @@ Application is split into the following layers:
 | Repository | Generic repository abstraction                                              |
 | Models     | Contains domain models                                                      |
 | API        | Contains DTOs and endpoint definitions                                      |
+| RMQReceive | Polls RabbitMQ to output messages to Console                                |
+| RMQSend    | Captures messages from Console to send to RabbitM                           |
 
 ## Branches
 
@@ -25,3 +27,4 @@ The following branches exist on this repository:
 |--------------------------|--------------------------------------|
 | main                     | Pure vanilla code                    |
 | feature/inputoutputpattern | Design pattern for input/output     |
+| feature/masstransitrabbitmq | Integrates API with MassTransit and RabbitMQ |

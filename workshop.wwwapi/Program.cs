@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using workshop.Data;
 using workshop.models;
+using workshop.models.builders;
 using workshop.Repository;
 using workshop.wwwapi.Endpoints;
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("People"));
 builder.Services.AddScoped<IRepository<Person>, Repository<Person>>();
+builder.Services.AddTransient<IPersonBuilder, PersonBuilder>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

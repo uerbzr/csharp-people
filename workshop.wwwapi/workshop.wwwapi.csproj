@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\workshop.data\workshop.data.csproj" />
+    <ProjectReference Include="..\workshop.models.builders\workshop.models.builders.csproj" />
     <ProjectReference Include="..\workshop.models\workshop.models.csproj" />
     <ProjectReference Include="..\workshop.repository\workshop.repository.csproj" />
   </ItemGroup>
