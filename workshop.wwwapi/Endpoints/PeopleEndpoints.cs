@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using workshop.models;
+using workshop.models.builders;
 using workshop.Repository;
 using workshop.wwwapi.DTO;
 
@@ -25,19 +26,12 @@ namespace workshop.wwwapi.Endpoints
         }
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public static async Task<IResult> Add(IRepository<Person> repository, PersonPost model)
+        public static async Task<IResult> Add(IPersonBuilder builder, IRepository<Person> repository, PersonPost model)
         {
             try
             {
-
-                Person person = new Person()
-                {
-                    Name = model.Name,
-                    Age = model.Age,
-                    Email = model.Email
-                };
+                var person = builder.SetName(model.Name).SetEmail(model.Email).SetAge(model.Age).Build();
                 await repository.Insert(person);
-
                 return TypedResults.Created($"https://localhost:7010/people/{person.Id}", person);
             }
             catch (Exception ex)
@@ -52,7 +46,7 @@ namespace workshop.wwwapi.Endpoints
         {
             try
             {
-                var model = await repository.GetById(id);
+                var entity = await repository.GetById(id);
                 var target = await repository.Delete(id);
                 if (target is not null) return Results.Ok(new { When = DateTime.Now, Status = "Deleted", Name = target.Name, Email= target.Email, Age = target.Age });
                 return TypedResults.NotFound();
@@ -69,11 +63,11 @@ namespace workshop.wwwapi.Endpoints
         {
             try
             {
-                var target = await repository.GetById(id);
-                if (target == null) return Results.NotFound();
-                if (model.Name != null) target.Name = model.Name;
-                if (model.Age != null) target.Age = model.Age.Value;
-                return Results.Ok(target);
+                var entity = await repository.GetById(id);
+                if (entity == null) return Results.NotFound();
+                if (model.Name != null) entity.Name = model.Name;
+                if (model.Age != null) entity.Age = model.Age.Value;
+                return Results.Ok(entity);
             }
             catch (Exception ex)
             {

@@ -18,6 +18,12 @@ namespace workshop.models.builders
            return _person;
         }
 
+        public IPersonBuilder SetAge(int age)
+        {
+            _person.Age = age;
+            return this;
+        }
+
         public IPersonBuilder SetEmail(string email)
         {
             _person.Email = email;

@@ -10,6 +10,7 @@ namespace workshop.models.builders
     {
         IPersonBuilder SetName(string name);
         IPersonBuilder SetEmail(string email);
+        IPersonBuilder SetAge(int age);
         Person Build();
     }
 }
